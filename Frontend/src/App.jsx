@@ -7,7 +7,7 @@ import SignUp from "./auth/SignUp.jsx";
 import SignIn from "./auth/SignIn.jsx";
 import AppLayout from "./layout/AppLayout.jsx";
 import WatchDemo from "./components/WatchDemo.jsx";
-import Dashboard from "./pages/dashboard.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 import Pricing from "./pages/Pricing.jsx";
 import PaymentSuccess from "./components/PaymentSuccess.jsx";
 import Account from "./pages/Account.jsx";
