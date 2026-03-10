@@ -171,8 +171,4 @@
   .sidebar-header > div {
     width: fit-content;
   }
-  .sidebar-logo {
-    width: 100px;
-    height: 100px;
-  }
 }

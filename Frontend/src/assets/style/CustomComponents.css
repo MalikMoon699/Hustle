@@ -195,7 +195,6 @@
   padding: 4px;
   border-radius: 4px;
   cursor: pointer;
-  z-index: 1;
   transition: 0.3s;
 }
 

@@ -1,10 +1,10 @@
 /* ===== Video Form ====== */
 .short-container {
-  max-width: 1000px;
-  width: 100%;
+  width: 1000px;
+  max-width: 97vw;
   height: fit-content;
   margin: 20px auto;
-  padding: 20px;
+  padding: clamp(8px, 2vw, 20px);
   border: 1px solid var(--border);
   box-shadow: 0px 0px 8px var(--muted);
   border-radius: 5px;
@@ -79,10 +79,6 @@
   text-align: center;
   padding: 8px;
   font-size: 14px;
-}
-
-.style-card:hover {
-  transform: translateY(-5px);
 }
 
 .active-style {
@@ -162,4 +158,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .style-grid {
+    gap: clamp(5px, 2vw, 20px);
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .style-card{
+    width: 125px;
+  }
+
+  .style-card img {
+    height: clamp(130px, 2vw, 160px);
+  }
 }

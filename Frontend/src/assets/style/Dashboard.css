@@ -7,3 +7,9 @@
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 20px;
 }
+
+@media (max-width: 768px) {
+  .dashboard-page {
+    padding: clamp(15px, 2vw, 25px) clamp(10px, 2vw, 20px);
+  }
+}

@@ -239,4 +239,29 @@
   .settings-grid-two {
     grid-template-columns: 1fr;
   }
+
+  .settings-section {
+    padding: clamp(14px, 2vw, 28px);
+  }
+
+  .settings-section-title {
+    font-size: 14px;
+  }
+
+  .settings-section-description {
+    font-size: 11px;
+  }
+
+  .settings-avatar {
+    height: clamp(60px, 2vw, 80px);
+    width: clamp(60px, 2vw, 80px);
+  }
+
+  .settings-toggle-title {
+    font-size: 14px;
+  }
+
+  .settings-toggle-description {
+    font-size: clamp(10px, 2vw, 12px);
+  }
 }

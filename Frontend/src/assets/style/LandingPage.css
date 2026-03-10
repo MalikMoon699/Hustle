@@ -249,7 +249,7 @@
   max-width: 1200px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 24px;
 }
 
@@ -288,7 +288,7 @@
   max-width: 1400px;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
 }
 
@@ -349,6 +349,8 @@
 
 .watch-demo-container {
   max-width: 900px;
+  min-height: fit-content;
+  overflow: auto;
   width: 100%;
   display: flex;
   align-items: center;
@@ -399,4 +401,81 @@
   line-height: 1.6;
   max-width: 600px;
   margin: auto;
+}
+
+@media (max-width: 768px) {
+  .landing-page-header-inner {
+    padding: 0px 0.3rem;
+  }
+
+  .landing-page-logo-text {
+    font-size: clamp(14px, 2vw, 20px);
+  }
+
+  .landing-page-header-actions {
+    gap: clamp(6px, 2vw, 12px);
+  }
+
+  .landing-page-icon-btn {
+    padding: 2px;
+  }
+  .landing-page-icon {
+    height: 15px;
+    width: 15px;
+  }
+
+  .landing-page-btn {
+    padding: clamp(4px, 2vw, 8px) clamp(8px, 2vw, 16px);
+    font-size: clamp(8px, 2vw, 14px);
+  }
+
+  .hero,
+  .features,
+  .workflow,
+  .cta {
+    padding: clamp(60px, 2vw, 120px) clamp(10px, 2vw, 20px);
+  }
+
+  .hero-title {
+    font-size: clamp(30px, 2vw, 60px);
+  }
+
+  .hero-subtitle {
+    margin-top: clamp(10px, 2vw, 20px);
+    font-size: clamp(15px, 2vw, 20px);
+  }
+
+  .btn-outline {
+    padding: 10px 8px;
+  }
+
+  .section-header h2 {
+    font-size: clamp(20px, 2vw, 36px);
+  }
+
+  .section-header p {
+    font-size: clamp(15px, 2vw, 20px);
+  }
+
+  .feature-card {
+    padding: clamp(15px, 2vw, 30px);
+  }
+
+  .cta h2 {
+    font-size: clamp(20px, 2vw, 40px);
+  }
+
+  .watch-demo-title {
+    font-size: clamp(15px, 2vw, 28px);
+    margin-bottom: clamp(4px, 2vw, 12px);
+  }
+
+  .watch-demo-description {
+    font-size: clamp(12px, 2vw, 16px);
+  }
+
+  .watch-demo-content .btn-primary {
+    padding: clamp(6px, 2vw, 12px) clamp(12px, 2vw, 24px);
+    border-radius: 8px;
+  }
 }

@@ -232,3 +232,42 @@
   display: flex;
   align-items: center;
 }
+
+@media (max-width: 768px) {
+  .signin-left {
+    width: 100%;
+    padding: clamp(15px, 2vw, 30px);
+  }
+
+  .form-card {
+    padding: clamp(13px, 2vw, 20px);
+  }
+
+  .carousel-container {
+    width: 0px;
+    display: none;
+  }
+
+  .logout-icon {
+    margin-bottom: 10px;
+  }
+
+  .logout-title {
+    font-size: 24px;
+    margin-bottom: 5px;
+  }
+
+  .logout-text {
+    margin-bottom: 22px;
+    font-size: 11px;
+  }
+
+  .logout-actions {
+    gap: clamp(12px, 2vw, 24px);
+  }
+
+  .logout-action-btn {
+    font-size: 16px;
+    padding: clamp(10px, 2vw, 16px) clamp(16px, 2vw, 28px);
+  }
+}

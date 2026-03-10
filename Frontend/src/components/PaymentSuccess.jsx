@@ -1,7 +1,14 @@
+import React, { useEffect } from "react";
 import { CheckCircle2 } from "lucide-react";
-import React from "react";
+import { useOutletContext } from "react-router";
 
 const PaymentSuccess = () => {
+  const { setValue } = useOutletContext();
+
+    useEffect(() => {
+      setValue("Payment");
+    }, []);
+
   return (
     <section
       style={{ width: "100%", background: "transparent" }}
@@ -15,7 +22,7 @@ const PaymentSuccess = () => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              padding: "40px",
+              padding: "clamp(20px,2vw,40px)",
             }}
             className="watch-demo-video-wrapper"
           >
@@ -30,10 +37,6 @@ const PaymentSuccess = () => {
         </div>
       </div>
     </section>
-    // <div style={{ padding: "100px", textAlign: "center" }}>
-    //   <h1>Payment Successful 🎉</h1>
-    //   <p></p>
-    // </div>
   );
 };
 
