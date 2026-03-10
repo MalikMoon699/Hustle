@@ -1,0 +1,120 @@
+.princing-header {
+  width: 100%;
+  min-width: 365px;
+  text-align: center;
+  margin: 7px 0px 62px 0px;
+  font-size: 28px;
+  color: var(--card-foreground);
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(365px, 1fr));
+  gap: 20px;
+}
+
+.pricing-card {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  background: var(--card);
+  border-radius: 15px;
+  padding: 20px;
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+}
+
+.pricing-header {
+  font-size: 28px;
+  color: var(--muted-foreground);
+  margin-bottom: 18px;
+}
+
+.pricing-price {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.price {
+  font-size: 35px;
+  font-weight: 600;
+}
+
+.duration {
+  font-size: 32px;
+  color: var(--muted-foreground);
+}
+
+.pricing-divider {
+  border-top: 1px dashed var(--border);
+  margin: 15px 0;
+  width: 100%;
+}
+
+.feature-text {
+  font-size: 28px;
+}
+
+.pricing-credits {
+  font-size: 30px;
+  font-weight: 500;
+}
+
+.credits-text {
+  color: var(--muted-foreground);
+  margin-left: 10px;
+  font-size: 26px;
+}
+
+.pricing-custom-creadits {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 4px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.pricing-custom-creadits > button {
+  font-size: 0px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  padding: 4px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.pricing-custom-creadits > button:disabled {
+  background: var(--muted);
+  color: var(--muted-foreground);
+  cursor: not-allowed;
+}
+
+.pricing-custom-creadits > input {
+  margin-top: 0px;
+  text-align: center;
+}
+
+.pricing-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 40px;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.pricing-btn:hover {
+  background: #00c29bc6;
+}

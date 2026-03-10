@@ -1,0 +1,9 @@
+.dashboard-page {
+  padding: 25px 20px;
+}
+
+.dashboard-videos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 20px;
+}

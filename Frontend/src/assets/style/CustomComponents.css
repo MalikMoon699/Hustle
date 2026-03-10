@@ -1,0 +1,343 @@
+/* ===== Selector Input ====== */
+.custom-filter-container {
+  position: relative;
+  padding: 13px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--card-foreground);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.custom-filter-selector {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 100px;
+  width: 100%;
+}
+
+.custom-filter-selector-title {
+  width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.custom-filter-selection-container {
+  position: absolute;
+  opacity: 0;
+  max-height: 300px;
+  overflow: auto;
+  top: 100%;
+  right: 0px;
+  background-color: var(--card);
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: 0px 0px 8px #00000012;
+  z-index: 100;
+  animation: fadeInUp 0.45s ease forwards;
+}
+
+.custom-filter-item {
+  text-align: start;
+  padding: 11px 12px;
+  font-size: 14px;
+  border: none;
+  width: 100%;
+  color: var(--foreground);
+  background-color: var(--card);
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.custom-filter-item:disabled {
+  cursor: not-allowed;
+}
+
+.custom-filter-item:hover {
+  background-color: var(--background);
+}
+
+.custom-filter-item.active {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--primary-hover);
+  color: var(--primary);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== LongHover style ====== */
+
+.custom-longhover-tooltip {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2c2c2c;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  animation: fadeIn 0.2s ease-in-out;
+  z-index: 999;
+}
+
+.custom-longhover-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #2c2c2c transparent transparent transparent;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -5px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ===== Search Input ====== */
+
+.customs-search-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  width: 100%;
+  min-width: 275px;
+  background: var(--card);
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  transition: 0.3s;
+}
+
+.customs-search-box:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(2, 108, 170, 0.082);
+}
+
+.customs-search-icon {
+  color: var(--border);
+  transition: 0.3s;
+  flex-shrink: 0;
+}
+
+.customs-search-box:focus-within > .customs-search-icon {
+  color: var(--primary);
+}
+
+.customs-search-input {
+  border: none;
+  outline: none;
+  background-color: var(--card);
+  color: var(--card-foreground);
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== Video card ====== */
+.custom-video-card {
+  position: relative;
+  min-height: 285px;
+  min-width: 190px;
+  height: 100%;
+  width: 100%;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.custom-video-card > video {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.custom-video-download {
+  position: absolute;
+  top: 4px;
+  right: -40px;
+  border: none;
+  font-size: 0px;
+  background: #00000054;
+  color: #fff;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1;
+  transition: 0.3s;
+}
+
+.custom-video-card:hover .custom-video-download {
+  opacity: 1;
+  right: 5px;
+}
+
+.custom-video-title {
+  position: absolute;
+  bottom: -40px;
+  opacity: 0;
+  background: #00000054;
+  width: 100%;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 9px 6px;
+  border-radius: 0px 50px 0px 0px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: 0.3s;
+}
+
+.custom-video-card:hover .custom-video-title {
+  bottom: 0;
+  opacity: 1;
+}
+
+/* ======== Profile Image Style ============ */
+.profile-image-container {
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.profile-image-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-image-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile-image-inner img.loaded {
+  opacity: 1;
+}
+
+.profile-image-loader {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(125deg, #f3f4f6 25%, #e5e7eb 37%, #f3f4f6 63%);
+  animation: shimmer 9s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100px 0;
+  }
+  100% {
+    background-position: 100px 0;
+  }
+}
+
+.profile-image-fallback {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* =========== custom Input =========== */
+.custom-input-label {
+  font-size: 13px;
+  margin-top: 10px;
+  display: block;
+  color: var(--card-foreground);
+}
+
+.custom-input,
+.custom-textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted-foreground);
+  outline: 0;
+  transition: 0.3s;
+}
+
+.custom-input:focus,
+.custom-textarea:focus {
+  border-color: var(--primary);
+  color: var(--card-foreground);
+}
+
+.custom-input-icon:focus-within > svg {
+  color: var(--primary);
+}
+
+.custom-textarea {
+  height: 200px;
+  resize: none;
+}
+
+.custom-input-icon {
+  position: relative;
+}
+
+.custom-input-icon > svg {
+  position: absolute;
+  top: 17px;
+  left: 10px;
+  font-size: 0px;
+  color: var(--muted-foreground);
+  transition: 0.3s;
+}
+
+.custom-input-icon > .custom-input {
+  padding-left: 32px;
+  padding-right: 24px;
+}
+
+.custom-password-toggel {
+  position: absolute;
+  top: 17px;
+  right: 10px;
+  font-size: 0px;
+  color: var(--muted-foreground);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}

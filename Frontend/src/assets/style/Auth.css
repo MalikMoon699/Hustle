@@ -1,0 +1,234 @@
+.signin-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--background);
+}
+
+.signin-left {
+  width: 50%;
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: 30px;
+}
+
+.signin-left-inner {
+  width: 500px;
+  text-align: center;
+}
+
+.sign-in-logo-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-in-logo {
+  width: 100px;
+  height: 95px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 8px;
+  background: var(--primary-hover);
+}
+
+.sign-in-logo > img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.signin-left h1 {
+  color: #0f9277;
+  margin-bottom: 5px;
+  font-size: 22px;
+}
+
+.signin-left p {
+  margin-bottom: 25px;
+  font-size: 15px;
+  color: var(--foreground);
+}
+
+.form-card {
+  width: 100%;
+  padding: 20px;
+  background: var(--card);
+  border-radius: 20px;
+  border: 2px solid var(--primary);
+  box-shadow: 0 10px 20px var(--primary-hover);
+}
+
+.form-card label {
+  display: block;
+  text-align: start;
+  margin-bottom: 2px;
+  margin-top: 12px;
+  color: var(--primary);
+}
+
+.icon-input-wrapper {
+  position: relative;
+}
+
+.icon-input-wrapper input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 18px;
+  border: 1px solid var(--primary);
+  color: var(--card-foreground);
+  background: var(--card);
+  margin-top: 5px;
+  background: transparent;
+  outline: none;
+  transition: 0.3s;
+}
+
+.icon-input-wrapper input:focus {
+  border: 2px solid var(--primary);
+}
+
+.icon-input-wrapper > .icon {
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  transform: translateY(-40%);
+  color: var(--primary);
+}
+
+.login-btn {
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 30px;
+  background: var(--primary);
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover > .icon {
+  transform: translateX(3px);
+}
+
+.signup-link {
+  margin-top: 25px;
+  margin-bottom: 0px !important;
+  text-align: center;
+}
+
+.signup-link span {
+  color: var(--primary);
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.signup-link span:hover {
+  text-decoration: underline;
+}
+
+.carousel-container {
+  width: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.card {
+  min-width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-hover);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ========== Logout Style ========== */
+.logout-model {
+  width: 500px;
+  text-align: center;
+  padding: 20px;
+}
+
+.logout-icon {
+  color: var(--status-rejected);
+  margin-bottom: 20px;
+}
+
+.logout-title {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.logout-text {
+  color: var(--muted-foreground);
+  margin-bottom: 36px;
+}
+
+.logout-actions {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.logout-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: none;
+  padding: 16px 28px;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-action-btn:hover {
+  gap: 14px;
+}
+
+.logout-action-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 0px 16px rgba(0, 0, 0, 0.143);
+}
+
+.logout-action-secondary {
+  background: var(--status-rejected);
+  color: #ffffff;
+  box-shadow: 0 0px 18px rgba(255, 1, 1, 0.233);
+}
+
+.btn-icon {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
