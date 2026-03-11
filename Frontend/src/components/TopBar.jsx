@@ -5,7 +5,7 @@ import { CirclePoundSterling } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const TopBar = ({ value = "" }) => {
-  const { currentUser } = useAuth();
+  const { currentUser, loading } = useAuth();
   const navigate = useNavigate();
 
   return (
@@ -16,7 +16,7 @@ const TopBar = ({ value = "" }) => {
         <h3 className="topbar-value">
           Hi,{" "}
           <span style={{ color: "var(--primary)" }}>
-            {currentUser?.name || "Topbar"}
+            {loading ? "loading..." : currentUser?.name || "Topbar"}
           </span>
         </h3>
       )}
