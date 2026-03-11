@@ -15,6 +15,20 @@ const app = express();
 connectToDB();
 
 app.use(cors());
+
+app.use(
+  cors({ origin: "https://hustle-ai-short.vercel.app", credentials: true }),
+);
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      callback(null, true);
+    },
+    credentials: true,
+  }),
+);
+
 app.use(morgan("dev"));
 
 app.use(express.json({ limit: "10mb" }));
