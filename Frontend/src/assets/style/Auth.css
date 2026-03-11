@@ -10,14 +10,47 @@
   width: 50%;
   background: var(--card);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   overflow: auto;
   padding: 30px;
+  position: relative;
+}
+
+.signin-back-btn-container {
+  width: 100%;
+  text-align: start;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.signin-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--card-foreground);
+}
+
+.signin-back-btn:hover {
+  background: var(--primary);
+  color: #fff;
+}
+
+.signin-back-btn:hover > span {
+  transform: translateX(-3px);
 }
 
 .signin-left-inner {
   width: 500px;
+  max-width: 95vw;
   text-align: center;
 }
 
@@ -190,10 +223,6 @@
   object-fit: cover;
 }
 
-/* ========== Forget Password Style ========== */
-
-
-
 /* ========== Logout Style ========== */
 .logout-model {
   width: 500px;
@@ -263,6 +292,18 @@
   .signin-left {
     width: 100%;
     padding: clamp(15px, 2vw, 30px);
+    justify-content: flex-start;
+  }
+
+  .signin-back-btn-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-bottom: 20px;
+  }
+
+  .signin-left-inner {
+    margin: auto;
   }
 
   .form-card {

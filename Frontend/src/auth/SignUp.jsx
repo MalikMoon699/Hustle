@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { IMAGES } from "../utils/constants";
-import { Mail, Eye, EyeOff, ArrowRight, User } from "lucide-react";
+import { Mail, Eye, EyeOff, ArrowRight, User, ArrowLeft } from "lucide-react";
 import "../assets/style/Auth.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
@@ -76,6 +76,14 @@ const SignUp = () => {
   return (
     <div className="signin-container">
       <div className="signin-left">
+        <div className="signin-back-btn-container">
+          <button onClick={() => navigate("/")} className="signin-back-btn">
+            <span className="icon">
+              <ArrowLeft size={18} />
+            </span>
+            Go back
+          </button>
+        </div>
         <div className="signin-left-inner">
           <div className="sign-in-logo-container">
             <div className="sign-in-logo">

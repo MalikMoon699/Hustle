@@ -1,5 +1,7 @@
 .dashboard-page {
   padding: 25px 20px;
+  max-width: 1400px;
+  width: 100%;
 }
 
 .dashboard-videos-grid {

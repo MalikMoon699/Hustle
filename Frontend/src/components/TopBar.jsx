@@ -10,22 +10,24 @@ const TopBar = ({ value = "" }) => {
 
   return (
     <div className="topbar-container">
-      {value ? (
-        <h3 className="topbar-value">{value || "Topbar"}</h3>
-      ) : (
-        <h3 className="topbar-value">
-          Hi,{" "}
-          <span style={{ color: "var(--primary)" }}>
-            {loading ? "loading..." : currentUser?.name || "Topbar"}
+      <div className="topbar-inner-container">
+        {value ? (
+          <h3 className="topbar-value">{value || "Topbar"}</h3>
+        ) : (
+          <h3 className="topbar-value">
+            Hi,{" "}
+            <span style={{ color: "var(--primary)" }}>
+              {loading ? "loading..." : currentUser?.name || "Topbar"}
+            </span>
+          </h3>
+        )}
+        <h4 onClick={() => navigate("/pricing")} className="topbar-credit">
+          <span className="icon">
+            <CirclePoundSterling fill="#f8a314" color="#f7d028" />
           </span>
-        </h3>
-      )}
-      <h4 onClick={() => navigate("/pricing")} className="topbar-credit">
-        <span className="icon">
-          <CirclePoundSterling fill="#f8a314" color="#f7d028" />
-        </span>
-        {currentUser?.credits || 0} credits
-      </h4>
+          {currentUser?.credits || 0} credits
+        </h4>
+      </div>
     </div>
   );
 };

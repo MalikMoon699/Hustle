@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import { IMAGES } from "../utils/constants";
-import { Mail, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { Mail, Eye, EyeOff, ArrowRight, ArrowLeft } from "lucide-react";
 import "../assets/style/Auth.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import Loader from "../components/Loader";
 import { toast } from "sonner";
 import { DashboardRoute } from "../utils/helper";
-import ForgetPasswordParent from "./ForgetPasswordParent"
+import ForgetPasswordParent from "./ForgetPasswordParent";
 
 const images = [IMAGES.auth1, IMAGES.auth2, IMAGES.auth3];
 
@@ -73,6 +73,14 @@ const SignIn = () => {
   return (
     <div className="signin-container">
       <div className="signin-left">
+        <div className="signin-back-btn-container">
+          <button onClick={() => navigate("/")} className="signin-back-btn">
+            <span className="icon">
+              <ArrowLeft size={18} />
+            </span>
+            Go back
+          </button>
+        </div>
         <div className="signin-left-inner">
           <div className="sign-in-logo-container">
             <div className="sign-in-logo">
