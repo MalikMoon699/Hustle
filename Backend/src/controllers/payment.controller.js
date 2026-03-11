@@ -29,8 +29,8 @@ export const createCheckoutSection = async (req, res) => {
         userId: req.user.id,
       },
 
-      success_url: `{FRONTEND_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `{FRONTEND_URL}/pricing`,
+      success_url: `${FRONTEND_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${FRONTEND_URL}/pricing`,
     });
 
     res.status(200).json({ url: session.url });
