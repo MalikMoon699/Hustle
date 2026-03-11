@@ -86,7 +86,7 @@
   font-size: 26px;
 }
 
-.pricing-custom-creadits {
+.pricing-custom-credits {
   display: flex;
   align-items: center;
   justify-content: start;
@@ -95,7 +95,7 @@
   margin-top: 10px;
 }
 
-.pricing-custom-creadits > button {
+.pricing-custom-credits > button {
   font-size: 0px;
   border: none;
   background: var(--primary);
@@ -105,13 +105,13 @@
   cursor: pointer;
 }
 
-.pricing-custom-creadits > button:disabled {
+.pricing-custom-credits > button:disabled {
   background: var(--muted);
   color: var(--muted-foreground);
   cursor: not-allowed;
 }
 
-.pricing-custom-creadits > input {
+.pricing-custom-credits > input {
   margin-top: 0px;
   text-align: center;
 }

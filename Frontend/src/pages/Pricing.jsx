@@ -13,8 +13,8 @@ const Pricing = () => {
   }, []);
 
   const PrinciplePlans = [
-    { planType: "Basic", price: 300, timeLimit: "month", creadits: 500 },
-    { planType: "Standard", price: 850, timeLimit: "month", creadits: 1000 },
+    { planType: "Basic", price: 300, timeLimit: "month", credits: 500 },
+    { planType: "Standard", price: 850, timeLimit: "month", credits: 1000 },
   ];
 
   return (
@@ -27,7 +27,7 @@ const Pricing = () => {
             planType={principle?.planType}
             price={principle?.price}
             timeLimit={principle?.timeLimit}
-            creadits={principle?.creadits}
+            credits={principle?.credits}
           />
         ))}
         <PrincingCard custom={true} planType="" />
@@ -43,9 +43,9 @@ const PrincingCard = ({
   planType = "",
   price = 0,
   timeLimit = "month",
-  creadits = 0,
+  credits = 0,
 }) => {
-  const [customCreadits, setCustomCreadits] = useState(1500);
+  const [customcredits, setCustomcredits] = useState(1500);
   const [customPrice, setCustomPrice] = useState(0);
   const [payLoading, setPayLoading] = useState(false);
 
@@ -54,7 +54,7 @@ const PrincingCard = ({
       setPayLoading(true);
 
       await handlePaymentHelper({
-        credits: custom ? customCreadits : creadits,
+        credits: custom ? customcredits : credits,
         price: custom ? customPrice : price,
       });
     } catch (err) {
@@ -66,18 +66,18 @@ const PrincingCard = ({
   };
 
   useEffect(() => {
-    const price = getCustomCreaditsPrice(customCreadits);
+    const price = getCustomcreditsPrice(customcredits);
     setCustomPrice(price);
-  }, [customCreadits]);
+  }, [customcredits]);
 
-  const getCustomCreaditsPrice = (creadits = 1) => {
+  const getCustomcreditsPrice = (credits = 1) => {
     const inOneDollar = 0.6;
-    const price = creadits * inOneDollar;
+    const price = credits * inOneDollar;
     return price.toFixed(2);
   };
 
   const handleChangeCreadit = (type = "inc") => {
-    setCustomCreadits((prev) => {
+    setCustomcredits((prev) => {
       if (type === "inc") return prev + 1;
       if (type === "dec") return prev > 1 ? prev - 1 : 1;
       return prev;
@@ -98,22 +98,22 @@ const PrincingCard = ({
 
         <div className="pricing-credits">
           <span className="credits-number">
-            {custom ? customCreadits : creadits}
+            {custom ? customcredits : credits}
           </span>
           <span className="credits-text">credits/{timeLimit}</span>
         </div>
         {custom && (
           <>
-            <div className="pricing-custom-creadits">
+            <div className="pricing-custom-credits">
               <button
-                disabled={customCreadits < 2}
+                disabled={customcredits < 2}
                 onClick={() => handleChangeCreadit("dec")}
               >
                 <Minus />
               </button>
               <input
                 type="number"
-                value={customCreadits}
+                value={customcredits}
                 className="custom-input"
                 min={1}
                 onChange={(e) => {
@@ -122,7 +122,7 @@ const PrincingCard = ({
                     return;
                   }
                   if (value < 1 || isNaN(value)) value = 1;
-                  setCustomCreadits(value);
+                  setCustomcredits(value);
                 }}
               />
               <button onClick={() => handleChangeCreadit("inc")}>

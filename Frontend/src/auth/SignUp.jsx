@@ -4,6 +4,7 @@ import { Mail, Eye, EyeOff, ArrowRight, User } from "lucide-react";
 import "../assets/style/Auth.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import Loader from "../components/Loader";
 
 const images = [IMAGES.auth1, IMAGES.auth2, IMAGES.auth3];
 
@@ -13,8 +14,9 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPassword, setIsPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const Validations = () => {
+  const validations = () => {
     if (name.trim() === "") {
       toast.error("Name is required.");
       return false;
@@ -27,13 +29,48 @@ const SignUp = () => {
       toast.error("Password is required.");
       return false;
     }
+    if (password.length < 8) {
+      toast.error("password must be at least 8 characters required!");
+      return false;
+    }
     return true;
   };
 
-  const handleSignUp = () => {
-    if (!Validations()) return;
-    toast.success("signUp sucessfully.");
-    navigate("/dashboard");
+  const handleSignUp = async () => {
+    if (!validations()) return;
+
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fullName: name,
+            email: email,
+            password: password,
+          }),
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.message || "Error signing up");
+        return;
+      }
+
+      toast.success("Account created! Please login.");
+      navigate("/sign-in");
+    } catch (error) {
+      console.error("Signup failed:", error);
+      toast.error("Signup failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -88,11 +125,21 @@ const SignUp = () => {
               </span>
             </div>
 
-            <button onClick={handleSignUp} className="login-btn">
-              Sign Up
-              <span className="icon">
-                <ArrowRight size={18} />
-              </span>
+            <button
+              onClick={handleSignUp}
+              disabled={loading}
+              className="login-btn"
+            >
+              {loading ? (
+                <Loader color="#fff" size="18" stroke="2" height="17px" />
+              ) : (
+                <>
+                  Sign Up{" "}
+                  <span className="icon">
+                    <ArrowRight size={16} />
+                  </span>
+                </>
+              )}
             </button>
 
             <p className="signup-link">

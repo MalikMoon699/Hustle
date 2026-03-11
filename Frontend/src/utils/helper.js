@@ -23,3 +23,11 @@ export const handleUploadImage = async (avatarFile) => {
     console.error("Failed to Upload Image:", err);
   }
 };
+
+export const DashboardRoute = (role, navigate) => {
+  if (role === "admin") {
+    navigate("/admin/dashboard");
+  } else {
+    navigate("/dashboard");
+  }
+};

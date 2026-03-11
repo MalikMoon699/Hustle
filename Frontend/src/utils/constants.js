@@ -42,7 +42,7 @@ export const SidebarMenuItems = [
     icon: "ShieldPlus",
     route: "/pricing",
     activeAt: "/pricing",
-    // startsWith: ["/appointment-details", "/appoint-booking/"],
+    startsWith: ["/payment-success"],
   },
   {
     name: "Account",
@@ -51,3 +51,5 @@ export const SidebarMenuItems = [
     activeAt: "/account",
   },
 ];
+
+export const limit = 4;

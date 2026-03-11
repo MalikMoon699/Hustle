@@ -12,7 +12,7 @@ const LogoutModel = ({ onClose }) => {
     try {
       await logout();
       toast.success("Logged out successfully!");
-      navigate("/signIn", { replace: true });
+      navigate("/sign-in", { replace: true });
     } catch (error) {
       console.error(error);
       toast.error("Failed to logout. Try again.");

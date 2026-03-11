@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Input, ProfileImage } from "../components/CustomComponents";
 import "../assets/style/Account.css";
-import { Bell, Camera, Lock, Mail, Palette, User } from "lucide-react";
+import { Camera, Lock, Mail, Palette, User } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { useTheme } from "../context/ThemeContext";
 import { IMAGES } from "../utils/constants";
 import Loader from "../components/Loader";
 import { handleUploadImage } from "../utils/helper";
+import {
+  updatePasswordHelper,
+  UpdateProfileHelper,
+} from "../services/auth.services";
 import { toast } from "sonner";
 import { useOutletContext } from "react-router";
 
@@ -30,26 +34,26 @@ const Account = () => {
 
   useEffect(() => {
     if (currentUser) {
-      setName(currentUser?.name);
+      setName(currentUser?.fullName);
     }
   }, [currentUser]);
 
   const handleProfileUpdate = async () => {
     try {
       setLoadingType("UpdateProfile");
-      let profileImgUrl = currentUser?.profilImg || "";
+      let profileImgUrl = currentUser?.profileImg || "";
       if (avatarFile) {
         profileImgUrl = await handleUploadImage(avatarFile);
       }
-      const isNameChanged = name !== currentUser?.name;
-      const isImageChanged = profileImgUrl !== currentUser?.profilImg;
+      const isNameChanged = name !== currentUser?.fullName;
+      const isImageChanged = profileImgUrl !== currentUser?.profileImg;
       if (!isNameChanged && !isImageChanged) {
         console.log("Nothing changed, skipping API call");
         return;
       }
       const payload = {
         name,
-        profilImg: profileImgUrl,
+        profileImg: profileImgUrl,
       };
 
       const res = await UpdateProfileHelper(currentUser?._id, payload);
@@ -78,10 +82,13 @@ const Account = () => {
       };
       const res = await updatePasswordHelper(currentUser?._id, payload);
       toast.success("Password Updated Successfuly.");
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
       return res;
     } catch (err) {
       console.error("Failed to update password:", err);
-      toast.error("Failed to Updated Password");
+      toast.error(err.message || "Failed to Updated Password");
     } finally {
       setLoadingType("");
     }
@@ -103,7 +110,7 @@ const Account = () => {
         <div className="settings-avatar-row">
           <ProfileImage
             Image={
-              avatarPreview || currentUser?.profilImg || IMAGES.PlaceHolder
+              avatarPreview || currentUser?.profileImg || IMAGES.PlaceHolder
             }
             className="settings-avatar"
           />

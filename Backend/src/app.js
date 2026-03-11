@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import morgan from "morgan";
 
+import authRoute from "./routes/auth.routes.js";
 import mediaRoute from "./routes/media.routes.js";
 import videoRoute from "./routes/video.routes.js";
 import paymrntRoute from "./routes/payment.routes.js";
@@ -20,6 +21,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 
+app.use("/api/auth", authRoute);
 app.use("/api/video", videoRoute);
 app.use("/api/media", mediaRoute);
 app.use("/api/payment", paymrntRoute);

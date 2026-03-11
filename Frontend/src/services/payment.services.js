@@ -18,3 +18,14 @@ export const handlePaymentHelper = async ({ credits = 0, price = 0 }) => {
     throw err?.response?.data || err;
   }
 };
+
+export const handleVerifyHelper = async (sessionId) => {
+  try {
+    const res = await API.post("/api/payment/verify-payment", {
+      sessionId,
+    });
+    return res;
+  } catch (err) {
+    throw err;
+  }
+};

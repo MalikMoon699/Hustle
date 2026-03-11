@@ -104,6 +104,28 @@
   color: var(--primary);
 }
 
+.auth-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-top: 1.2rem;
+}
+
+.auth-remember {
+  display: flex !important;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted-foreground);
+}
+
+.auth-link {
+  color: var(--primary);
+  cursor: pointer;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
 .login-btn {
   margin-top: 25px;
   display: flex;
@@ -167,6 +189,10 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* ========== Forget Password Style ========== */
+
+
 
 /* ========== Logout Style ========== */
 .logout-model {

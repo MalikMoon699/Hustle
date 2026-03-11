@@ -3,17 +3,24 @@ import { IMAGES } from "../utils/constants";
 import { Mail, Eye, EyeOff, ArrowRight } from "lucide-react";
 import "../assets/style/Auth.css";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import Loader from "../components/Loader";
 import { toast } from "sonner";
+import { DashboardRoute } from "../utils/helper";
+import ForgetPasswordParent from "./ForgetPasswordParent"
 
 const images = [IMAGES.auth1, IMAGES.auth2, IMAGES.auth3];
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const { refresh, currentUser } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPassword, setIsPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isForget, setIsForget] = useState(false);
 
-  const Validations = () => {
+  const validations = () => {
     if (email.trim() === "") {
       toast.error("Email is required.");
       return false;
@@ -22,13 +29,45 @@ const SignIn = () => {
       toast.error("Password is required.");
       return false;
     }
+    if (password.length < 8) {
+      toast.error("password must be at least 8 characters required!");
+      return false;
+    }
     return true;
   };
 
-  const handleLogin = () => {
-    if (!Validations()) return;
-    toast.success("Login sucessfully.");
-    navigate("/dashboard");
+  const handleSignIn = async () => {
+    const isValid = validations();
+    if (!isValid) return;
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, password }),
+        },
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error(data.message || "Invalid credentials");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      setEmail("");
+      setPassword("");
+      await refresh();
+      DashboardRoute(currentUser?.role, navigate);
+    } catch (error) {
+      console.error("Login failed:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -74,11 +113,26 @@ const SignIn = () => {
               </span>
             </div>
 
-            <button onClick={handleLogin} className="login-btn">
-              Log in
-              <span className="icon">
-                <ArrowRight size={18} />
+            <div className="auth-options">
+              <span className="auth-remember">
+                <input type="checkbox" />
+                Remember me
               </span>
+              <span onClick={() => setIsForget(true)} className="auth-link">
+                Forgot password?
+              </span>
+            </div>
+            <button onClick={handleSignIn} className="login-btn">
+              {loading ? (
+                <Loader color="#fff" size="18" stroke="2" height="17px" />
+              ) : (
+                <>
+                  Sign in{" "}
+                  <span className="icon">
+                    <ArrowRight size={16} />
+                  </span>
+                </>
+              )}
             </button>
 
             <p className="signup-link">
@@ -89,6 +143,7 @@ const SignIn = () => {
         </div>
       </div>
       <Carousel images={images} />
+      {isForget && <ForgetPasswordParent onClose={() => setIsForget(false)} />}
     </div>
   );
 };

@@ -4,17 +4,9 @@ import { toast } from "sonner";
 
 const AuthCtx = createContext(null);
 
-const user = {
-  id: "6983419f15992f32c9fd9890",
-  profileImage: "",
-  creadits: 31,
-  name: "Admin HealthPilot",
-  email: "admin@healthpilot.com",
-};
-
 export const AuthProvider = ({ children }) => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
-    const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const [authAllow, setAuthAllow] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isDetail, setIsDetail] = useState(true);
@@ -37,8 +29,7 @@ export const AuthProvider = ({ children }) => {
   const fetchMe = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
-      setCurrentUser(user);
-      // setCurrentUser(null);
+      setCurrentUser(null);
       setAuthAllow(false);
       setIsDetail(false);
       setLoading(false);
@@ -46,7 +37,7 @@ export const AuthProvider = ({ children }) => {
     }
     try {
       const res = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/api/auth/user`,
+        `${import.meta.env.VITE_BACKEND_URL}/api/auth/logged-user-data`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -58,16 +49,12 @@ export const AuthProvider = ({ children }) => {
       const data = await res.json();
 
       if (res.ok) {
-        if (data.status === "approved") {
+        if (data.status === "active") {
           setCurrentUser(data);
           setAuthAllow(true);
         } else {
           logout(false);
-          toast.error(
-            data.status === "pending"
-              ? "Your account is pending approval"
-              : "Your account has been banned",
-          );
+          toast.error("Your account has been banned");
         }
       } else {
         logout(false);
@@ -85,7 +72,7 @@ export const AuthProvider = ({ children }) => {
     setCurrentUser(null);
     setAuthAllow(false);
     setIsDetail(false);
-    if (redirect) navigate("/signIn");
+    if (redirect) navigate("/sign-in");
   };
 
   useEffect(() => {

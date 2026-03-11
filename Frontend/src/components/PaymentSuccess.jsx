@@ -1,13 +1,33 @@
 import React, { useEffect } from "react";
 import { CheckCircle2 } from "lucide-react";
 import { useOutletContext } from "react-router";
+import { handleVerifyHelper } from "../services/payment.services";
+import { useAuth } from "../context/AuthContext";
+import { toast } from "sonner";
 
 const PaymentSuccess = () => {
   const { setValue } = useOutletContext();
+  const { refresh } = useAuth();
 
-    useEffect(() => {
-      setValue("Payment");
-    }, []);
+  useEffect(() => {
+    setValue("Payment");
+    handleVerify();
+  }, []);
+
+  const handleVerify = async () => {
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get("session_id");
+    try {
+      const res = await handleVerifyHelper(sessionId);
+      toast.success(res?.data?.message || "Credits added successfully");
+      if(res?.status=== 200){
+        refresh();
+      }
+    } catch (err) {
+      console.error("Failed to increase credits:", err.response?.data);
+      toast.error("Credits failed to add.");
+    }
+  };
 
   return (
     <section
