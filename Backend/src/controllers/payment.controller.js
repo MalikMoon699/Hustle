@@ -1,12 +1,14 @@
 import Stripe from "stripe";
 import { STRIPE_SECRET_KEY, FRONTEND_URL } from "../config/env.js";
 import User from "../models/user.model.js";
+import Payment from "../models/payment.model.js";
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
 
 export const createCheckoutSection = async (req, res) => {
   try {
-    const { credits, price } = req.body;
+    const { credits, price, planType, periodType } = req.body;
+
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
       mode: "payment",
@@ -25,12 +27,25 @@ export const createCheckoutSection = async (req, res) => {
       ],
 
       metadata: {
-        credits: credits,
+        credits,
         userId: req.user.id,
+        planType,
+        price,
+        periodType,
       },
 
       success_url: `${FRONTEND_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${FRONTEND_URL}/pricing`,
+    });
+
+    await Payment.create({
+      userId: req.user.id,
+      stripeSessionId: session.id,
+      planType,
+      price,
+      periodType,
+      credits,
+      status: "pending",
     });
 
     res.status(200).json({ url: session.url });
@@ -47,28 +62,69 @@ export const verifyPayment = async (req, res) => {
 
     const session = await stripe.checkout.sessions.retrieve(sessionId);
 
+    const payment = await Payment.findOne({ stripeSessionId: sessionId });
+    if (!payment)
+      return res.status(404).json({ error: "Payment record not found" });
+
     if (session.payment_status !== "paid") {
+      payment.status = "failed";
+      await payment.save();
+
       return res.status(400).json({ error: "Payment not completed" });
     }
 
-    const credits = Number(session.metadata.credits);
-    const userId = session.metadata.userId;
+    if (payment.status === "paid") {
+      return res.status(200).json({ message: "Payment already processed" });
+    }
+
+    const { credits, userId } = session.metadata;
 
     const user = await User.findById(userId);
     if (!user) return res.status(404).json({ error: "User not found" });
-    user.processedSessions = user.processedSessions || [];
-    if (user.processedSessions.includes(sessionId)) {
-      return res.status(200).json({ message: "credits already processed" });
-    }
 
-    user.credits += credits;
-    user.processedSessions.push(sessionId);
-
+    user.credits += Number(credits);
     await user.save();
 
-    res.status(200).json({ success: true, message: "Credits added successfully" });
+    payment.status = "paid";
+    await payment.save();
+
+    res.status(200).json({
+      success: true,
+      message: "Credits added and payment updated",
+    });
   } catch (error) {
     console.error("Verify payment error:", error);
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export const getPaymentRecords = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    const skip = (page - 1) * limit;
+
+    const payments = await Payment.find({ userId })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const totalPayments = await Payment.countDocuments({ userId });
+
+    res.status(200).json({
+      success: true,
+      data: payments,
+      pagination: {
+        total: totalPayments,
+        page,
+        limit,
+        totalPages: Math.ceil(totalPayments / limit),
+      },
+    });
+  } catch (error) {
+    console.error("Get payment records error:", error);
     res.status(500).json({ error: error.message });
   }
 };

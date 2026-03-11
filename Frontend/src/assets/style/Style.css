@@ -66,6 +66,7 @@ body {
 .empty-data {
   padding: 60px;
   text-align: center;
+  color: var(--card-foreground);
 }
 
 .app-container {

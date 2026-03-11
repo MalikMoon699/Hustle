@@ -31,3 +31,17 @@ export const DashboardRoute = (role, navigate) => {
     navigate("/dashboard");
   }
 };
+
+export const getExpireDate = (createdAt = "", periodType = "month") => {
+  if (!createdAt) return "";
+
+  const date = new Date(createdAt);
+
+  if (periodType === "month") {
+    date.setMonth(date.getMonth() + 1);
+  } else if (periodType === "year") {
+    date.setFullYear(date.getFullYear() + 1);
+  }
+
+  return date.toLocaleDateString(); // return string
+};

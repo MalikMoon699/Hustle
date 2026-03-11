@@ -52,4 +52,4 @@ export const SidebarMenuItems = [
   },
 ];
 
-export const limit = 4;
+export const limit = 1;

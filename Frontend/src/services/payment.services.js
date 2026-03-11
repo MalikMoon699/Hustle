@@ -1,10 +1,16 @@
 import API from "../utils/api";
 
-export const handlePaymentHelper = async ({ credits = 0, price = 0 }) => {
-  if (credits === 0 || price === 0) return;
+export const handlePaymentHelper = async ({
+  credits = 0,
+  price = 0,
+  planType = "",
+  periodType = "",
+}) => {
+  if (credits === 0 || price === 0 || planType === "" || periodType === "")
+    return;
 
   try {
-    const body = { credits, price };
+    const body = { credits, price, planType, periodType };
 
     const res = await API.post("/api/payment/create-checkout-session", body);
 
@@ -27,5 +33,16 @@ export const handleVerifyHelper = async (sessionId) => {
     return res;
   } catch (err) {
     throw err;
+  }
+};
+
+export const getPaymentRecordsHelper = async (page = 1, limit = 20) => {
+  try {
+    const res = await API.get("/api/payment/payment-records", {
+      params: { page, limit },
+    });
+    return res.data;
+  } catch (err) {
+    throw err.response?.data;
   }
 };

@@ -96,138 +96,137 @@ const Account = () => {
 
   return (
     <div className="dashboard-page">
-      <section style={{ marginTop: "0px" }} className="settings-section">
-        <div className="settings-section-header">
-          <Camera size={20} />
-          <div>
-            <h2 className="settings-section-title">Profile</h2>
-            <p className="settings-section-description">
-              Update your personal information
-            </p>
+      <div className="settings-grid-two">
+        <section style={{ margin: "0px" }} className="settings-section">
+          <div className="settings-section-header">
+            <Camera size={20} />
+            <div>
+              <h2 className="settings-section-title">Profile</h2>
+              <p className="settings-section-description">
+                Update your personal information
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="settings-avatar-row">
-          <ProfileImage
-            Image={
-              avatarPreview || currentUser?.profileImg || IMAGES.PlaceHolder
-            }
-            className="settings-avatar"
+          <div className="settings-avatar-row">
+            <ProfileImage
+              Image={
+                avatarPreview || currentUser?.profileImg || IMAGES.PlaceHolder
+              }
+              className="settings-avatar"
+            />
+            <div className="settings-avatar-actions">
+              <input
+                type="file"
+                accept="image/*"
+                style={{ display: "none" }}
+                ref={fileInputRef}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (!file) return;
+                  setAvatarFile(file);
+                  setAvatarPreview(URL.createObjectURL(file));
+                }}
+              />
+
+              <button
+                onClick={() => fileInputRef.current.click()}
+                className="settings-outline-button"
+              >
+                <Camera size={16} /> Change Avatar
+              </button>
+              <p className="settings-hint">JPG, PNG or GIF. Max size 2MB.</p>
+            </div>
+          </div>
+
+          <div className="settings-divider" />
+          <Input
+            label="Full Name"
+            value={name}
+            setValue={setName}
+            placeholder="John doe"
+            type="inputIcon"
+            Icon={User}
           />
-          <div className="settings-avatar-actions">
-            <input
-              type="file"
-              accept="image/*"
-              style={{ display: "none" }}
-              ref={fileInputRef}
-              onChange={(e) => {
-                const file = e.target.files[0];
-                if (!file) return;
-                setAvatarFile(file);
-                setAvatarPreview(URL.createObjectURL(file));
-              }}
-            />
 
-            <button
-              onClick={() => fileInputRef.current.click()}
-              className="settings-outline-button"
-            >
-              <Camera size={16} /> Change Avatar
-            </button>
-            <p className="settings-hint">JPG, PNG or GIF. Max size 2MB.</p>
+          <Input
+            label="Email"
+            value={currentUser?.email || "N/A"}
+            readOnly={true}
+            placeholder="john@example.com"
+            type="inputIcon"
+            Icon={Mail}
+            InputType="email"
+            onClick={() => toast.info("Not allow to change email.")}
+          />
+          <button
+            disabled={loadingType !== ""}
+            onClick={handleProfileUpdate}
+            className="settings-primary-button"
+          >
+            {loadingType === "UpdateProfile" ? (
+              <Loader color="#fff" size="15" stroke="2" />
+            ) : (
+              "Save Changes"
+            )}
+          </button>
+        </section>
+
+        <section style={{ margin: "0px" }} className="settings-section">
+          <div className="settings-section-header">
+            <Lock size={20} />
+            <div>
+              <h2 className="settings-section-title">Security</h2>
+              <p className="settings-section-description">
+                Manage your password and security settings
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div className="settings-divider" />
-        <Input
-          label="Full Name"
-          value={name}
-          setValue={setName}
-          placeholder="John doe"
-          type="inputIcon"
-          Icon={User}
-        />
-
-        <Input
-          label="Email"
-          value={currentUser?.email || "N/A"}
-          readOnly={true}
-          placeholder="john@example.com"
-          type="inputIcon"
-          Icon={Mail}
-          InputType="email"
-          onClick={() => toast.info("Not allow to change email.")}
-        />
-        <button
-          disabled={loadingType !== ""}
-          onClick={handleProfileUpdate}
-          className="settings-primary-button"
-        >
-          {loadingType === "UpdateProfile" ? (
-            <Loader color="#fff" size="15" stroke="2" />
-          ) : (
-            "Save Changes"
-          )}
-        </button>
-      </section>
-
-      <section className="settings-section">
-        <div className="settings-section-header">
-          <Lock size={20} />
-          <div>
-            <h2 className="settings-section-title">Security</h2>
-            <p className="settings-section-description">
-              Manage your password and security settings
-            </p>
-          </div>
-        </div>
-
-        <Input
-          label="Current Password"
-          value={currentPassword}
-          setValue={setCurrentPassword}
-          placeholder="••••••••"
-          type="inputIcon"
-          Icon={Lock}
-          InputType="password"
-        />
-        <div className="settings-grid-two">
-          <div>
-            <Input
-              label="New Password"
-              value={newPassword}
-              setValue={setNewPassword}
-              placeholder="••••••••"
-              type="inputIcon"
-              Icon={Lock}
-              InputType="password"
-            />
-          </div>
-          <div>
-            <Input
-              label="Confirm Password"
-              value={confirmPassword}
-              setValue={setConfirmPassword}
-              placeholder="••••••••"
-              type="inputIcon"
-              Icon={Lock}
-              InputType="password"
-            />
-          </div>
-        </div>
-        <button
-          disabled={loadingType !== ""}
-          onClick={handlePasswordUpdate}
-          className="settings-secondary-button"
-        >
-          {loadingType === "UpdatePassword" ? (
-            <Loader size="15" stroke="2" />
-          ) : (
-            "Update Password"
-          )}
-        </button>
-      </section>
-
+          <Input
+            label="Current Password"
+            value={currentPassword}
+            setValue={setCurrentPassword}
+            placeholder="••••••••"
+            type="inputIcon"
+            Icon={Lock}
+            InputType="password"
+          />
+            <div>
+              <Input
+                label="New Password"
+                value={newPassword}
+                setValue={setNewPassword}
+                placeholder="••••••••"
+                type="inputIcon"
+                Icon={Lock}
+                InputType="password"
+              />
+            </div>
+            <div>
+              <Input
+                label="Confirm Password"
+                value={confirmPassword}
+                setValue={setConfirmPassword}
+                placeholder="••••••••"
+                type="inputIcon"
+                Icon={Lock}
+                InputType="password"
+              />
+            </div>
+          <button
+            disabled={loadingType !== ""}
+            onClick={handlePasswordUpdate}
+            className="settings-secondary-button"
+          >
+            {loadingType === "UpdatePassword" ? (
+              <Loader size="15" stroke="2" />
+            ) : (
+              "Update Password"
+            )}
+          </button>
+        </section>
+      </div>
       <section className="settings-section">
         <div className="settings-section-header">
           <Palette size={20} />

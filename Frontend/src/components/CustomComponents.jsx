@@ -10,6 +10,8 @@ import {
   XCircle,
 } from "lucide-react";
 import "../assets/style/CustomComponents.css";
+import Loader from "./Loader";
+
 
 export const Selector = ({
   disabled = false,
@@ -350,5 +352,31 @@ export const Input = ({
         />
       )}
     </>
+  );
+};
+
+export const LoadMore = ({
+  loading = false,
+  disabled = false,
+  show = false,
+  onLoad,
+  style = {},
+}) => {
+  return (
+    show && (
+      <div style={style} className="custom-loadMore-container">
+        {loading ? (
+          <Loader stroke="3" size="30" />
+        ) : (
+          <button
+            disabled={disabled}
+            onClick={onLoad}
+            className="custom-load-more-btn"
+          >
+            Load More
+          </button>
+        )}
+      </div>
+    )
   );
 };
