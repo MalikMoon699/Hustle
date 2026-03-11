@@ -1,5 +1,5 @@
 import Stripe from "stripe";
-import { STRIPE_SECRET_KEY } from "../config/env.js";
+import { STRIPE_SECRET_KEY, FRONTEND_URL } from "../config/env.js";
 import User from "../models/user.model.js";
 
 const stripe = new Stripe(STRIPE_SECRET_KEY);
@@ -29,9 +29,8 @@ export const createCheckoutSection = async (req, res) => {
         userId: req.user.id,
       },
 
-      success_url:
-        "http://localhost:5173/payment-success?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "http://localhost:5173/pricing",
+      success_url: `{FRONTEND_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `{FRONTEND_URL}/pricing`,
     });
 
     res.status(200).json({ url: session.url });
