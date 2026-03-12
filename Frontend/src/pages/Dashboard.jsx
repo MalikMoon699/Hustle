@@ -16,7 +16,12 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-page">
-      <SearchInput margin="0px 0px 20px 0px" placeholder="Search videos..."  value={searchFilter} setValue={setSearchFilter} />
+      <SearchInput
+        margin="0px 0px 20px 0px"
+        placeholder="Search videos..."
+        value={searchFilter}
+        setValue={setSearchFilter}
+      />
       {videos?.length > 0 ? (
         <div className="dashboard-videos-grid">
           {videos?.map((video, index) => (
@@ -28,7 +33,9 @@ const Dashboard = () => {
           ))}
         </div>
       ) : (
-        <p className="empty-data">No videos found.</p>
+        <p className="empty-data" style={{ minHeight: "50vh" }}>
+          No videos found.
+        </p>
       )}
     </div>
   );

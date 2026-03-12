@@ -225,6 +225,27 @@
   opacity: 1;
 }
 
+.video-skeleton {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--secondary) 25%,
+    var(--background) 37%,
+    var(--secondary) 63%
+  );
+  background-size: 400% 100%;
+  animation: skeleton-loading 1.4s ease infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
 /* ======== Profile Image Style ============ */
 .profile-image-container {
   border-radius: 50%;
@@ -258,7 +279,12 @@
   width: 100%;
   height: 100%;
   border-radius: 8px;
-  background: linear-gradient(125deg, #f3f4f6 25%, #e5e7eb 37%, #f3f4f6 63%);
+  background: linear-gradient(
+    125deg,
+    var(--secondary) 40%,
+    var(--background) 46%,
+    var(--secondary) 65%
+  );
   animation: shimmer 9s infinite;
 }
 

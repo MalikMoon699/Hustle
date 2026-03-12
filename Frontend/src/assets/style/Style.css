@@ -65,7 +65,9 @@ body {
 
 .empty-data {
   padding: 60px;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--card-foreground);
 }
 

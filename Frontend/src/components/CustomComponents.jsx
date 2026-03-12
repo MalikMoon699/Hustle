@@ -144,6 +144,7 @@ export const SearchInput = ({
 
 export const VideoCard = ({ title = "", link = "" }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const videoRef = useRef(null);
 
   const handlePlay = () => {
@@ -175,17 +176,31 @@ export const VideoCard = ({ title = "", link = "" }) => {
       onMouseEnter={handlePlay}
       onMouseLeave={handlePause}
     >
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          handleDownload();
-        }}
-        className="custom-video-download"
-      >
-        <Download size={18} />
-      </button>
-      <video ref={videoRef} src={link} controls={false} muted playsInline />
+      {!isLoading && (
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDownload();
+          }}
+          className="custom-video-download"
+        >
+          <Download size={18} />
+        </button>
+      )}
+      {isLoading && <div className="video-skeleton"></div>}
+
+      <video
+        ref={videoRef}
+        src={link}
+        muted
+        playsInline
+        controls={false}
+        onLoadedData={() => setIsLoading(false)}
+        style={{ display: isLoading ? "none" : "block" }}
+      />
+
       <h2 className="custom-video-title">{title}</h2>
+
       {isOpen && (
         <VideoCardModel title={title} link={link} setIsOpen={setIsOpen} />
       )}
